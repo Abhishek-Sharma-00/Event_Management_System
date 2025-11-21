@@ -1,0 +1,56 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.profile-container {
+  width: 450px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-container p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.profile-container button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  background: #479cf6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.profile-container button:hover {
+  background: #0056b3;
+}
+
+.profile-container .delete-btn {
+  background: #ef0808;
+}
+
+.profile-container .delete-btn:hover {
+  background: #991111;
+}
+
+.edit-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
