@@ -54,9 +54,6 @@ export default function Login() {
           <Button variant="ghost" onClick={() => navigate("/about")}>
             About Us
           </Button>
-          <Button variant="ghost" onClick={() => navigate("/contact")}>
-            Contact
-          </Button>
 
           {user ? (
             <div className="profile-dropdown-wrapper">
@@ -68,7 +65,7 @@ export default function Login() {
                   {user.role === "admin" && (
                     <span className="user-badge">Admin</span>
                   )}
-                  {user.role === "ateendee" && (
+                  {user.role === "attendee" && (
                     <span className="user-badge">Attendee</span>
                   )}
                 </div>
@@ -77,11 +74,14 @@ export default function Login() {
               {/* DROPDOWN MENU */}
               {open && (
                 <div className="dropdown-menu">
-                  <p onClick={() => navigate("/admin") || "/attendee"}>
-                    Admin Dashboard
+                  <p
+                    onClick={() =>
+                      navigate(user.role === "admin" ? "/admin" : "/attendee")
+                    }
+                  >
+                    Dashboard
                   </p>
-                  <p onClick={() => navigate("/events")}>My Events</p>
-                  <p onClick={() => navigate("/admin/profile")}>Settings</p>
+                  <p onClick={() => navigate("/profile")}>Manage Profile</p>
                   <hr />
                   <p className="logout-btn" onClick={logout}>
                     Logout

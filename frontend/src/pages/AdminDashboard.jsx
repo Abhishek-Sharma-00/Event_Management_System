@@ -69,7 +69,11 @@ export default function AdminDashboard() {
 
   const fetchRegistrations = async () => {
     try {
-      const res = await axios.get(`${API}/registrations`);
+      const token = localStorage.getItem("token");
+
+      const res = await axios.get(`${API}/registrations`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setRegistrations(res.data);
     } catch (err) {
       toast.error("Failed to load registrations");
@@ -190,9 +194,6 @@ export default function AdminDashboard() {
           <Button variant="ghost" onClick={() => navigate("/about")}>
             About Us
           </Button>
-          <Button variant="ghost" onClick={() => navigate("/contact")}>
-            Contact
-          </Button>
 
           {user ? (
             <div className="profile-dropdown-wrapper">
@@ -213,13 +214,14 @@ export default function AdminDashboard() {
               {/* DROPDOWN MENU */}
               {open && (
                 <div className="dropdown-menu">
-                  <p onClick={() => navigate("/admin") || "/attendee"}>
-                    Admin Dashboard
+                  <p
+                    onClick={() =>
+                      navigate(user.role === "admin" ? "/admin" : "/attendee")
+                    }
+                  >
+                    Dashboard
                   </p>
-                  <p onClick={() => navigate("/events")}>Events</p>
-                  <p onClick={() => navigate("/admin/profile")}>
-                    Manage Profile
-                  </p>
+                  <p onClick={() => navigate("/profile")}>Manage Profile</p>
                   <hr />
                   <p className="logout-btn" onClick={logout}>
                     Logout
@@ -280,9 +282,11 @@ export default function AdminDashboard() {
                   <tbody>
                     {registrations.map((r) => (
                       <tr key={r._id}>
-                        <td className="p-2 border">{r.name}</td>
-                        <td className="p-2 border">{r.email}</td>
-                        <td className="p-2 border">{r.phone}</td>
+                        <td className="p-2 border">{r.userId?.name}</td>
+                        <td className="p-2 border">{r.userId?.email}</td>
+                        <td className="p-2 border">
+                          {r.userId?.phone || "N/A"}
+                        </td>
                         <td className="p-2 border">
                           {r.eventId?.title || "Event Deleted"}
                         </td>
@@ -325,7 +329,6 @@ export default function AdminDashboard() {
               </DialogHeader>
 
               <form onSubmit={handleSubmit} className="admin-form">
-                {/* Title */}
                 <div className="form-field">
                   <Label>Title *</Label>
                   <Input
@@ -337,7 +340,6 @@ export default function AdminDashboard() {
                   />
                 </div>
 
-                {/* Date */}
                 <div className="form-field">
                   <Label>Date *</Label>
                   <Input
@@ -350,7 +352,6 @@ export default function AdminDashboard() {
                   />
                 </div>
 
-                {/* Time */}
                 <div className="form-field">
                   <Label>Time *</Label>
                   <Input
@@ -363,7 +364,6 @@ export default function AdminDashboard() {
                   />
                 </div>
 
-                {/* Location */}
                 <div className="form-field">
                   <Label>Location *</Label>
                   <Input
@@ -375,7 +375,6 @@ export default function AdminDashboard() {
                   />
                 </div>
 
-                {/* Category */}
                 <div className="form-field">
                   <Label>Category *</Label>
                   <select
@@ -428,7 +427,6 @@ export default function AdminDashboard() {
                   />
                 </div>
 
-                {/* Image URL */}
                 <div className="form-field">
                   <Label>Image URL</Label>
                   <Input
@@ -440,7 +438,6 @@ export default function AdminDashboard() {
                   />
                 </div>
 
-                {/* Description */}
                 <div className="form-field">
                   <Label>Description *</Label>
                   <Textarea
@@ -464,7 +461,6 @@ export default function AdminDashboard() {
         {/* Loading UI */}
         {loading && <div className="loading-state">Loading events...</div>}
 
-        {/* Error UI */}
         {error && (
           <div className="error-state">
             <h2 style={{ color: "red" }}>Failed to load events</h2>
@@ -473,7 +469,6 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Empty UI */}
         {!loading && !error && events.length === 0 && (
           <div className="empty-state">
             No events yet. Create your first event!
@@ -489,7 +484,6 @@ export default function AdminDashboard() {
                   <div className="event-info">
                     <h3 className="event-row-title">{event.title}</h3>
 
-                    {/* Show registration usage */}
                     <p className="event-row-meta">
                       {event.currentRegistrations || 0} /{" "}
                       {event.maxRegistrations || 50} <span>Attendee</span>

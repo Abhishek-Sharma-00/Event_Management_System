@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-// import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, MapPin, Users } from "lucide-react";
 import {
@@ -15,9 +14,7 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import "@/styles/EventList.css";
-// import { number } from "zod";
 import logo from "../assets/EventUs-logo.png";
-
 const API = "http://localhost:5000/api";
 
 const categories = [
@@ -84,9 +81,6 @@ export default function EventList() {
           <Button variant="ghost" onClick={() => navigate("/about")}>
             About Us
           </Button>
-          <Button variant="ghost" onClick={() => navigate("/contact")}>
-            Contact
-          </Button>
 
           {user ? (
             <div className="profile-dropdown-wrapper">
@@ -98,7 +92,7 @@ export default function EventList() {
                   {user.role === "admin" && (
                     <span className="user-badge">Admin</span>
                   )}
-                  {user.role === "ateendee" && (
+                  {user.role === "attendee" && (
                     <span className="user-badge">Attendee</span>
                   )}
                 </div>
@@ -107,11 +101,15 @@ export default function EventList() {
               {/* DROPDOWN MENU */}
               {open && (
                 <div className="dropdown-menu">
-                  <p onClick={() => navigate("/admin") || "/attendee"}>
-                    Admin Dashboard
+                  <p
+                    onClick={() =>
+                      navigate(user.role === "admin" ? "/admin" : "/attendee")
+                    }
+                  >
+                    Dashboard
                   </p>
-                  <p onClick={() => navigate("/events")}>My Events</p>
-                  <p onClick={() => navigate("/admin/profile")}>Settings</p>
+
+                  <p onClick={() => navigate("/profile")}>Manage Profile</p>
                   <hr />
                   <p className="logout-btn" onClick={logout}>
                     Logout
@@ -279,4 +277,3 @@ export default function EventList() {
     </div>
   );
 }
-<div className="flex items-center gap-2 text-gray-600"></div>;

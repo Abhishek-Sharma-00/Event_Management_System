@@ -15,6 +15,8 @@
 }
 
 .profile-container h1 {
+  font-size: 1.3rem;
+  font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -28,7 +30,7 @@
   width: 100%;
   padding: 10px;
   margin-top: 12px;
-  background: #479cf6;
+  background: #2e85e3;
   color: white;
   border: none;
   border-radius: 8px;

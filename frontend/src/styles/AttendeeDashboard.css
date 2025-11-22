@@ -1,0 +1,75 @@
+.dashboard-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.no-events {
+  text-align: center;
+  color: gray;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.event-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  transition: box-shadow 0.3s;
+}
+
+.event-card:hover {
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
+}
+
+.event-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.event-row-content {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.event-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.event-date {
+  color: #666;
+  margin: 8px 0;
+}
+
+.unregister-btn {
+  background-color: #d62828;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  margin-top: 12px;
+  width: 100%;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.unregister-btn:hover {
+  background-color: #a31818;
+}

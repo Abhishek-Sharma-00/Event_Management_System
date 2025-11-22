@@ -1,13 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Target, Heart, Award, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { useAuth } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import "@/styles/AboutPage.css";
+import logo from "../assets/EventUs-logo.png";
 import {
-  Calendar,
-  Users,
-  CheckCircle,
-  TrendingUp,
-  ArrowRight,
   Mail,
   Phone,
   MapPin,
@@ -16,17 +15,14 @@ import {
   Linkedin,
   Instagram,
 } from "lucide-react";
-import "../styles/Home.css";
-import { useAuth } from "@/context/AuthContext";
-import logo from "../assets/EventUs-logo.png";
 
-export default function Home() {
+export default function AboutPage() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="home-wrapper">
+    <div className="about-container">
       {/* NAVBAR */}
       <nav className="homepage-navbar">
         <div className="nav-left">
@@ -71,6 +67,7 @@ export default function Home() {
                   >
                     Dashboard
                   </p>
+
                   <p onClick={() => navigate("/profile")}>Manage Profile</p>
                   <hr />
                   <p className="logout-btn" onClick={logout}>
@@ -90,88 +87,96 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="hero-section-new">
-        <h2>Welcome to EventUS</h2>
-        <p>
-          Create, manage, and organize events seamlessly. From conferences to
-          workshops, handle everything in one powerful platform.
+      <section className="section-center">
+        <h1 className="text-title mb-6">About EVENTUS</h1>
+        <p className="text-body max-width-text">
+          EventUS was founded with a simple mission: to make event management
+          accessible, efficient, and enjoyable for everyone. Whether you're
+          organizing a small workshop or a large conference, we provide the
+          tools you need to succeed.
         </p>
-        <div className="hero-buttons-new">
-          <Button
-            onClick={() =>
-              navigate(user?.role === "admin" ? "/admin" : "/register")
-            }
-          >
-            Create Your Event
-          </Button>
-
-          <Button variant="outline" onClick={() => navigate("/events")}>
-            Browse Events
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
       </section>
 
-      <section className="features-section">
-        <h3>Why Choose EventUS?</h3>
-        <div className="features-grid">
-          <Card className="feature-card">
-            <CardContent>
-              <Calendar className="h-12 w-12 text-blue-600 mb-4" />
-              <h4>Easy Event Creation</h4>
-              <p>
-                Create and customize events in minutes with our intuitive
-                interface.
+      <section className="section-padding">
+        <div className="info-grid">
+          <Card className="card-custom">
+            <CardHeader className="card-header-center">
+              <Target className="icon-space h-12 w-12 text-blue-600" />
+              <h3 className="text-title">Our Mission</h3>
+            </CardHeader>
+            <CardContent className="card-body">
+              <p className="text-body">
+                To simplify event management and help organizers create
+                memorable experiences.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="feature-card">
-            <CardContent>
-              <Users className="h-12 w-12 text-green-600 mb-4" />
-              <h4>Attendee Management</h4>
-              <p>
-                Track registrations and manage attendees with comprehensive
-                tools.
+          <Card className="card-custom">
+            <CardHeader className="card-header-center">
+              <Heart className="icon-space h-12 w-12 text-red-600" />
+              <h3 className="text-title">Our Values</h3>
+            </CardHeader>
+            <CardContent className="card-body">
+              <p className="text-body">
+                Innovation, reliability, and customer satisfaction drive
+                everything we do.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="feature-card">
-            <CardContent>
-              <CheckCircle className="h-12 w-12 text-purple-600 mb-4" />
-              <h4>Real-time Updates</h4>
-              <p>
-                Keep everyone informed with instant notifications and updates.
+          <Card className="card-custom">
+            <CardHeader className="card-header-center">
+              <Award className="icon-space h-12 w-12 text-yellow-600" />
+              <h3 className="text-title">Our Excellence</h3>
+            </CardHeader>
+            <CardContent className="card-body">
+              <p className="text-body">
+                Award-winning platform trusted by event professionals worldwide.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="feature-card">
-            <CardContent>
-              <TrendingUp className="h-12 w-12 text-orange-600 mb-4" />
-              <h4>Analytics & Insights</h4>
-              <p>
-                Get valuable insights about your events and attendee engagement.
+          <Card className="card-custom">
+            <CardHeader className="card-header-center">
+              <Users className="icon-space h-12 w-12 text-green-600" />
+              <h3 className="text-title">Our Community</h3>
+            </CardHeader>
+            <CardContent className="card-body">
+              <p className="text-body">
+                Join thousands of organizers who trust EventUS for their events.
               </p>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="cta-section">
-        <h3>Ready to Get Started?</h3>
-        <p>
-          Join thousands of event organizers who trust EventUS for their event
-          management needs.
-        </p>
-        <Button onClick={() => navigate("/admin")}>
-          Create Your First Event
-        </Button>
+      <section className="gray-bg-section">
+        <div className="story-text">
+          <h2 className="text-title mb-8 text-center">Our Story</h2>
+          <div className="story-content">
+            <p>
+              EventUS began in 2025 when a group of event professionals
+              recognized the need for a more intuitive and comprehensive event
+              management solution...
+            </p>
+            <p>
+              We continue to innovate and improve, driven by feedback from our
+              community of users...
+            </p>
+          </div>
+        </div>
       </section>
 
+      <section className="section-padding">
+        <div className="join-wrapper">
+          <h2 className="text-title join-title">Join Our Journey</h2>
+          <p className="text-body">
+            Be part of our growing community and help shape the future of event
+            management.
+          </p>
+        </div>
+      </section>
       {/* FOOTER */}
       <footer className="homepage-footer">
         <div className="footer-grid">

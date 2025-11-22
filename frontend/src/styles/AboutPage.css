@@ -1,0 +1,93 @@
+/* Global Spacing for Sections */
+.about-container > section {
+  margin-bottom: 4rem;
+}
+
+.section-center {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.section-padding {
+  padding: 3rem 1rem;
+}
+
+.text-title {
+  color: #111827;
+}
+
+.text-body {
+  color: #4b5563;
+}
+
+.max-width-text {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .info-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card-custom {
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.card-header-center {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.icon-space {
+  margin-bottom: 1rem;
+}
+
+.gray-bg-section {
+  background-color: #f9fafb;
+  padding: 4rem 1rem;
+}
+
+.story-text {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.story-content {
+  color: #4b5563;
+}
+
+.story-content p {
+  margin-bottom: 1rem;
+}
+
+.join-wrapper {
+  max-width: 56rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.join-title {
+  margin-bottom: 1rem;
+}

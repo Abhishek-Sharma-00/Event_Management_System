@@ -16,6 +16,7 @@ export default function Register() {
   const { register } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState("attendee");
@@ -28,7 +29,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      await register(name, email, password, role);
+      await register(name, email, phone, password, role);
       toast.success("Registration successful!");
       navigate("/");
     } catch (error) {
@@ -57,9 +58,6 @@ export default function Register() {
           <Button variant="ghost" onClick={() => navigate("/about")}>
             About Us
           </Button>
-          <Button variant="ghost" onClick={() => navigate("/contact")}>
-            Contact
-          </Button>
 
           {user ? (
             <div className="profile-dropdown-wrapper">
@@ -71,7 +69,7 @@ export default function Register() {
                   {user.role === "admin" && (
                     <span className="user-badge">Admin</span>
                   )}
-                  {user.role === "ateendee" && (
+                  {user.role === "attendee" && (
                     <span className="user-badge">Attendee</span>
                   )}
                 </div>
@@ -80,10 +78,13 @@ export default function Register() {
               {/* DROPDOWN MENU */}
               {open && (
                 <div className="dropdown-menu">
-                  <p onClick={() => navigate("/admin") || "/attendee"}>
-                    Admin Dashboard
+                  <p
+                    onClick={() =>
+                      navigate(user.role === "admin" ? "/admin" : "/attendee")
+                    }
+                  >
+                    Dashboard
                   </p>
-                  <p onClick={() => navigate("/events")}>My Events</p>
                   <p onClick={() => navigate("/admin/profile")}>Settings</p>
                   <hr />
                   <p className="logout-btn" onClick={logout}>
@@ -137,6 +138,18 @@ export default function Register() {
                   data-testid="register-email-input"
                 />
               </div>
+              <div className="form-field">
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  type="text"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                  data-testid="register-phone-input"
+                />
+              </div>
+
               <div className="form-field">
                 <Label htmlFor="password">Password</Label>
                 <div className="password-input-wrapper">

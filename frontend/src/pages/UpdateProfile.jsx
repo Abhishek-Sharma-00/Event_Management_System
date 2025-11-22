@@ -11,10 +11,14 @@ const UpdateProfile = () => {
   const [admin, setAdmin] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [passwordMode, setPasswordMode] = useState(false);
-  const [form, setForm] = useState({});
   const [passwords, setPasswords] = useState({
     oldPassword: "",
     newPassword: "",
+  });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
   });
 
   useEffect(() => {
@@ -25,7 +29,11 @@ const UpdateProfile = () => {
     try {
       const res = await fetchProfile();
       setAdmin(res.data);
-      setForm(res.data);
+      setForm({
+        name: res.data.name,
+        email: res.data.email,
+        phone: res.data.phone,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +64,7 @@ const UpdateProfile = () => {
   return (
     <div className="main">
       <div className="profile-container">
-        <h1>Admin Profile</h1>
+        <h1>Update Your Profile</h1>
 
         {!editMode && !passwordMode && (
           <>
@@ -99,7 +107,7 @@ const UpdateProfile = () => {
             <input
               type="text"
               placeholder="Phone"
-              value={form.phone}
+              value={form.phone || ""}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
             />
 

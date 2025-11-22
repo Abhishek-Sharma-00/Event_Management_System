@@ -10,16 +10,26 @@ import EventDetails from "@/pages/EventDetails";
 import AdminDashboard from "@/pages/AdminDashboard";
 import RegistrationConfirmation from "@/pages/RegistrationConfirmation";
 import UpdateProfile from "@/pages/UpdateProfile";
+import AboutPage from "@/pages/AboutPage";
+import AttendeeDashboard from "@/pages/AttendeeDashboard";
 import "@/App.css";
 
-const ProtectedRoute = ({ children, adminOnly = false }) => {
+const ProtectedRoute = ({
+  children,
+  adminOnly = false,
+  attendeeOnly = false,
+}) => {
   const { user } = useAuth();
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   if (adminOnly && user.role !== "admin") {
+    return <Navigate to="/" />;
+  }
+
+  if (attendeeOnly && user.role !== "attendee") {
     return <Navigate to="/" />;
   }
 
@@ -28,8 +38,8 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <div className="App">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -45,16 +55,25 @@ function App() {
                 </ProtectedRoute>
               }
             />
-              <Route path="/admin/profile" element={<UpdateProfile />} />
+            <Route
+              path="/attendee"
+              element={
+                <ProtectedRoute attendeeOnly={true}>
+                  <AttendeeDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/profile" element={<UpdateProfile />} />
             <Route
               path="/registration-success"
               element={<RegistrationConfirmation />}
             />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
-          <Toaster position="top-right" />
+          <Toaster position="bottom-right" />
         </div>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

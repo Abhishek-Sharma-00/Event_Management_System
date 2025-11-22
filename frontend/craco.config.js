@@ -32,15 +32,14 @@ if (config.enableHealthCheck) {
 const webpackConfig = {
   webpack: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      "@": path.resolve(__dirname, "src"),
     },
     configure: (webpackConfig) => {
-
       // Disable hot reload completely if environment variable is set
       if (config.disableHotReload) {
         // Remove hot reload related plugins
-        webpackConfig.plugins = webpackConfig.plugins.filter(plugin => {
-          return !(plugin.constructor.name === 'HotModuleReplacementPlugin');
+        webpackConfig.plugins = webpackConfig.plugins.filter((plugin) => {
+          return !(plugin.constructor.name === "HotModuleReplacementPlugin");
         });
 
         // Disable watch mode
@@ -53,12 +52,12 @@ const webpackConfig = {
         webpackConfig.watchOptions = {
           ...webpackConfig.watchOptions,
           ignored: [
-            '**/node_modules/**',
-            '**/.git/**',
-            '**/build/**',
-            '**/dist/**',
-            '**/coverage/**',
-            '**/public/**',
+            "**/node_modules/**",
+            "**/.git/**",
+            "**/build/**",
+            "**/dist/**",
+            "**/coverage/**",
+            "**/public/**",
           ],
         };
       }
@@ -89,7 +88,11 @@ if (config.enableVisualEdits || config.enableHealthCheck) {
     }
 
     // Add health check endpoints if enabled
-    if (config.enableHealthCheck && setupHealthEndpoints && healthPluginInstance) {
+    if (
+      config.enableHealthCheck &&
+      setupHealthEndpoints &&
+      healthPluginInstance
+    ) {
       const originalSetupMiddlewares = devServerConfig.setupMiddlewares;
 
       devServerConfig.setupMiddlewares = (middlewares, devServer) => {
@@ -120,6 +123,5 @@ webpackConfig.devServer = {
     },
   },
 };
-
 
 module.exports = webpackConfig;
