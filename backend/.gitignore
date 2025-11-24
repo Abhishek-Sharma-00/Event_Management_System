@@ -1,5 +1,26 @@
-# Node modules
+# Node.js Essentials
 node_modules/
-
-# Environment variables
+npm-debug.log
+package-lock.json
 .env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Logs
+logs
+*.log
+debug.log
+error.log
+
+# Build / Cache
+dist/
+build/
+.cache/
+.temp/
+.DS_Store
+
+# OS Files
+Thumbs.db
+.DS_Store

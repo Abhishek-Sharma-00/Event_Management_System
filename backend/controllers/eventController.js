@@ -3,8 +3,27 @@ import Attendee from "../models/Registration.js";
 
 // GET ALL EVENTS
 export const getEvents = async (req, res) => {
-  const events = await Event.find();
-  res.json(events);
+  try {
+    const { search, category } = req.query;
+
+    let filter = {};
+
+    if (category && category !== "All") {
+      filter.category = category;
+    }
+
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    const events = await Event.find(filter);
+    res.json(events);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export const getEventById = async (req, res) => {
