@@ -88,7 +88,7 @@ export default function AboutPage() {
       </nav>
 
       <section className="section-center">
-        <h1 className="text-title mb-6">About EVENTUS</h1>
+        <h1 className="text-title mb-6">About EventUS</h1>
         <p className="text-body max-width-text">
           EventUS was founded with a simple mission: to make event management
           accessible, efficient, and enjoyable for everyone. Whether you're
@@ -182,7 +182,7 @@ export default function AboutPage() {
         <div className="footer-grid">
           <div>
             <div className="footer-logo">
-              <img src={logo} alt="EVENTUS" className="nav-logo" />
+              <img src={logo} alt="EventUS-logo" className="nav-logo" />
               <span>EventUS</span>
             </div>
             <p>

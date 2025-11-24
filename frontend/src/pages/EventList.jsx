@@ -19,10 +19,10 @@ const API = "http://localhost:5000/api";
 
 const categories = [
   "All",
-  "Technology",
-  "Business",
-  "Arts",
-  "Sports",
+  "Conference",
+  "Workshop",
+  "Meeting",
+  "Social",
   "Music",
   "Education",
   "Other",
@@ -40,7 +40,10 @@ export default function EventList() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetchEvents();
+    const timeout = setTimeout(() => {
+      fetchEvents();
+    }, 300);
+    return () => clearTimeout(timeout);
   }, [category, search]);
 
   const fetchEvents = async () => {
@@ -49,14 +52,18 @@ export default function EventList() {
 
     try {
       const params = {};
-      if (category !== "All") params.category = category;
-      if (search) params.search = search;
+      if (category !== "All") {
+        params.category = category;
+      }
+      if (search.trim() !== "") {
+        params.search = search.trim().toLowerCase();
+      }
 
       const response = await axios.get(`${API}/events`, { params });
       setEvents(response.data);
     } catch (err) {
       console.error("Error fetching events:", err);
-      setError(true); // show fallback UI
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -144,7 +151,10 @@ export default function EventList() {
             data-testid="event-search-input"
           />
 
-          <Select value={category} onValueChange={setCategory}>
+          <Select
+            value={category}
+            onValueChange={(value) => setCategory(value)}
+          >
             <SelectTrigger
               className="category-select"
               data-testid="event-category-select"

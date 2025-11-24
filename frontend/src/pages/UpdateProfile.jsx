@@ -8,7 +8,7 @@ import {
 import "../styles/UpdateProfile.css";
 
 const UpdateProfile = () => {
-  const [admin, setAdmin] = useState(null);
+  const [usera, setUsera] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [passwordMode, setPasswordMode] = useState(false);
   const [passwords, setPasswords] = useState({
@@ -28,7 +28,7 @@ const UpdateProfile = () => {
   const loadProfile = async () => {
     try {
       const res = await fetchProfile();
-      setAdmin(res.data);
+      setUsera(res.data);
       setForm({
         name: res.data.name,
         email: res.data.email,
@@ -59,7 +59,7 @@ const UpdateProfile = () => {
     }
   };
 
-  if (!admin) return <h2>Loading...</h2>;
+  if (!usera) return <h2>Loading...</h2>;
 
   return (
     <div className="main">
@@ -69,10 +69,13 @@ const UpdateProfile = () => {
         {!editMode && !passwordMode && (
           <>
             <p>
-              <strong>Name:</strong> {admin.name}
+              <strong>Name:</strong> {usera.name}
             </p>
             <p>
-              <strong>Email:</strong> {admin.email}
+              <strong>Email:</strong> {usera.email}
+            </p>
+            <p>
+              <strong>Role:</strong> {usera.role}
             </p>
 
             <button className="edit-btn" onClick={() => setEditMode(true)}>
