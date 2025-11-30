@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import "@/styles/EventList.css";
 import logo from "../assets/EventUs-logo.png";
-const API = "https://ems-backend-kafw.onrender.com";
+const API = "http://localhost:5000/api";
 
 const categories = [
   "All",
