@@ -8,7 +8,7 @@ import axios from "axios";
 import "@/styles/EventDetails.css";
 import { ArrowLeft } from "lucide-react";
 
-const API = "http://localhost:5000/api";
+const API = "https://ems-backend-kafw.onrender.com";
 
 export default function EventDetails() {
   const { id } = useParams();

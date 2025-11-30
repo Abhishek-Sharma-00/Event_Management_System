@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+const API = "https://ems-backend-kafw.onrender.com";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import "@/styles/AttendeeDashboard.css";
 import logo from "../assets/EventUs-logo.png";
 
-const API = "http://localhost:5000/api";
+const API = "https://ems-backend-kafw.onrender.com";
 
 export default function AttendeeDashboard() {
   const navigate = useNavigate();
