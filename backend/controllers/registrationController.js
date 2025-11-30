@@ -18,10 +18,17 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ detail: "Event is fully booked" });
     }
 
+    const existing = await Registration.findOne({ eventId, userId });
+    if (existing) {
+      return res
+        .status(400)
+        .json({ detail: "Already registered for this event" });
+    }
+
     const registration = await Registration.create({
       eventId,
       userId,
-      phone: req.user.phone,
+      phone: req.user.phone || "",
     });
 
     event.currentRegistrations = (event.currentRegistrations || 0) + 1;

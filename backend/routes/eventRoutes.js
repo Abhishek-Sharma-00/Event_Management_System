@@ -6,13 +6,18 @@ import {
   updateEvent,
   deleteEvent,
 } from "../controllers/eventController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import adminMiddleware from "../middleware/adminMiddleware.js";
 
 const router = express.Router();
 
-// GET all events + CREATE event
-router.route("/").get(getEvents).post(createEvent);
+// Public: GET all and GET by id
+router.get("/", getEvents);
+router.get("/:id", getEventById);
 
-// GET single event + UPDATE + DELETE
-router.route("/:id").put(updateEvent).delete(deleteEvent).get(getEventById);
+// Protected: CREATE / UPDATE / DELETE - Admin only
+router.post("/", authMiddleware, adminMiddleware, createEvent);
+router.put("/:id", authMiddleware, adminMiddleware, updateEvent);
+router.delete("/:id", authMiddleware, adminMiddleware, deleteEvent);
 
 export default router;

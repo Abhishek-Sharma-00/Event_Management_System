@@ -16,6 +16,7 @@ import eventRoutes from "./routes/eventRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 
+app.use("/api", authRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/registrations", registrationRoutes);
@@ -28,7 +29,7 @@ app.listen(process.env.PORT || 5000, () => {
 
 // GLOBAL ERROR HANDLER (shows exact backend errors)
 app.use((err, req, res, next) => {
-  console.error("\n🔥 SERVER ERROR:");
+  console.error("\nSERVER ERROR:");
   console.error(err.stack);
   res
     .status(500)

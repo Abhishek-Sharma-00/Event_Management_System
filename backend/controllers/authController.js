@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 // GENERATE TOKEN FUNCTION
 const generateToken = (id) => {
@@ -18,13 +19,11 @@ export const registerUser = async (req, res) => {
     if (exists)
       return res.status(400).json({ message: "Email already exists" });
 
-    const hashedPassword = password;
-
     const newUser = await User.create({
       name,
       email,
       phone,
-      password: hashedPassword,
+      password,
       role,
     });
 
@@ -51,13 +50,16 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    // const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
+
     if (!user) return res.status(400).json({ message: "Invalid email" });
 
-    const match = password;
+    const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(400).json({ message: "Wrong password" });
 
     const token = generateToken(user._id);
+    user.password = undefined;
 
     res.json({
       success: true,

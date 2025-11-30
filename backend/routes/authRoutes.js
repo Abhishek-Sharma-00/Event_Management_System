@@ -17,6 +17,10 @@ router.get("/me", authMiddleware, async (req, res) => {
   res.json(req.user);
 });
 
+router.get("/profile", authMiddleware, async (req, res) => {
+  res.json(req.user);
+});
+
 // CHANGE PASSWORD
 router.put("/change-password", authMiddleware, async (req, res, next) => {
   try {
